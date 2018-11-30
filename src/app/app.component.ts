@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'quiz-appl';
+  title = 'quiz-app';
+  header = 'Welcome To Quiz';
+
+  constructor () {}
+
+  displayHeader () {
+    this.header = "Results";
+  }
 }

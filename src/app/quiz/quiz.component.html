@@ -1,0 +1,29 @@
+<div class="quiz-component"  *ngIf="!showResult">
+    <div *ngFor="let question of filteredQuestions;">
+      <div class="badge badge-info">Question {{page.index + 1}} of {{page.count}}.</div>
+      <h3 class="font-weight-normal">{{page.index + 1}}.
+        <span [innerHTML]="question.text"></span>
+      </h3>
+      <div class="row text-left options">
+        <div class="col-6" *ngFor="let option of question.options; let i = index" [attr.data-index]="i">
+          <div class="option">
+            <label class="font-weight-normal" [attr.for]="option.id">
+              <input type="checkbox" id="{{option.id}}" [(ngModel)]="option.selected"  (change)="onSelect(question, option , question.answer , i);"/>{{option.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="next-prev-container" *ngIf="page.index < page.count">
+        <button class="btn btn-primary prev" [disabled] = "page.index === 0" (click)="goToPrev();">Prev</button>
+        <button class="btn btn-primary" [disabled] ="page.index === 7" (click)="goToNext();">Next</button>
+        <button class="btn btn-primary submit" (click)="onSubmit();">Submit</button>
+    </div> 
+</div>
+<div class="result-container" *ngIf="showResult">
+    <div class="grid-container">
+      <div class="grid-item" *ngFor="let question of questions; let i = index" [ngStyle]="{'backgroundColor':getColor(question)}">{{i+1}}.{{result}}</div>
+    </div>
+    <button class="btn btn-primary try-again" (click)="reloadQuiz();">Try again</button>
+</div>
+
